@@ -1,0 +1,11 @@
+.UserOutput{
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px  #33CEFF;
+    margin: 16px auto;
+    padding: 16px;
+    width: 50%;
+    text-align: center;
+    background-color: #222;
+    color: #ccc;
+ }
