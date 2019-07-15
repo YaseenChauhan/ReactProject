@@ -1,9 +1,12 @@
 import React, { Component,useState } from 'react';
+import Radium, {StyleRoot} from 'radium';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput'
+import UserOutput from './UserOutput/UserOutput';
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
 
 class App extends Component {
   state = {
@@ -41,11 +44,18 @@ class App extends Component {
   }
   render() {
     const style = {
-      backgroundColor : 'white',
+      backgroundColor : 'green',
+      color : 'white',
       font : 'inherit',
-      border : '1px solid blue',
+      border : '1px solid white',
+      borderRadius : '5px',
       padding : '8px',
-      cursor : 'pointer'
+      cursor : 'pointer',
+      marginTop : '10px',
+      ':hover' : {
+        backgroundColor : 'lightgreen',
+        color : 'black'
+      }
     };
     let persons = null;
     if(this.state.showPersons){
@@ -61,17 +71,30 @@ class App extends Component {
               })}
        </div>
       )
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor : 'salmon',
+        color : 'black'
+      }
        }
+       const classes = [];
+
+       if(this.state.person.length <=2)
+       classes.push('go')
+
+       if(this.state.person.length <=1)
+       classes.push('down')
+
+       
     
     return (
-      <div className="App">
+      <StyleRoot>
+        <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to React</h1>
       </header>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
+      <p className={classes.join(' ')}>Here we go down.........</p>
       <button 
        style = {style}
        onClick={this.togglePersonHandler}>
@@ -79,13 +102,140 @@ class App extends Component {
        </button>
        {persons}
        </div> 
+      </StyleRoot>
+      
     );
   }
 }
 
 
 
-export default App;
+export default Radium(App);
+// class App extends Component {
+//   state = {
+//     person : [
+//       {id : 'ass1',capacity :"80", days : "1"},
+//       {id : 'afgs41',capacity : "40", days:"5"},
+//       {id : 'arrr12',capacity:"70", days :"10"}
+//     ],
+//     otherState : 'some other things',
+//     showPersons :  false
+//   }
+      
+//   changeInputHandler = (event,id) => {
+//     const index = this.state.person.findIndex((per) => {
+//       return per.id === id; 
+//     });
+//     const cap = {...this.state.person[index]};
+//     //const person = Object.assign({},this.state.person[index]);
+//     cap.capacity = event.target.value;
+
+//     const persons = [...this.state.person];
+//     persons[index] = cap;
+    
+//     this.setState({person : persons});
+//   }
+//   togglePersonHandler = () => {
+//     const doesShow = this.state.showPersons;
+//     this.setState({showPersons : !doesShow});
+//   }
+
+//   deletePersonhandler = (index) => {
+//     const person = [...this.state.person];
+//     person.splice(index,1);
+//     this.setState({person : person})
+//   }
+//   render() {
+//     const style = {
+//       backgroundColor : 'white',
+//       font : 'inherit',
+//       border : '1px solid blue',
+//       padding : '8px',
+//       cursor : 'pointer'
+//     };
+//     let persons = null;
+//     if(this.state.showPersons){
+//       persons = (
+//             <div>
+//               {this.state.person.map((per,index) => {
+//                 return <Person
+//                         click={() => this.deletePersonhandler(index)}
+//                         change= {(event) => this.changeInputHandler(event,per.id)}
+//                         capacity={per.capacity} 
+//                         days={per.days}
+//                         key={per.id}/>
+//               })}
+//        </div>
+//       )
+//        }
+    
+//     return (
+//       <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <h1 className="App-title">Welcome to React</h1>
+//       </header>
+//       <p className="App-intro">
+//         To get started, edit <code>src/App.js</code> and save to reload.
+//       </p>
+//       <button 
+//        style = {style}
+//        onClick={this.togglePersonHandler}>
+//        Change state
+//        </button>
+//        {persons}
+//        </div> 
+//     );
+//   }
+// }
+
+
+
+
+// class App extends Component {
+//   state = {
+//     userInput : ''
+//   }
+//   inputChangeHandler = (event) => {
+//     this.setState({userInput : event.target.value})
+//   }
+//   deleteCharhandler = (index) => {
+//     const text = this.state.userInput.split('');
+//     text.splice(index,1);
+//     const updatedText = text.join('');
+//     this.setState({userInput : updatedText});
+//   }
+//   render() {
+//     const CharList = this.state.userInput.split('').map((c,index) => {
+//       return <Char 
+//               value={c}
+//               key={index}
+//               clicked={() => this.deleteCharhandler(index)}
+//         />
+//     })
+//     return (
+//       <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <h1 className="App-title">Welcome to React</h1>
+//       </header>
+//       <p className="App-intro">
+//         To get started, edit <code>src/App.js</code> and save to reload.
+//       </p>
+//       <hr/>
+//       <input type="text" 
+//               onChange={this.inputChangeHandler}
+//               value={this.state.userInput}/>
+//               <Validation inputLength={this.state.userInput.length}/>
+
+//       <p>Entered value : {this.state.userInput}</p>
+
+//       {CharList}
+//        </div> 
+//     );
+//   }
+// }
+
 
 
 // class App extends Component {
