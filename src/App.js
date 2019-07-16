@@ -7,6 +7,9 @@ import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+
+
 
 class App extends Component {
   state = {
@@ -44,18 +47,11 @@ class App extends Component {
   }
   render() {
     const style = {
-      backgroundColor : 'green',
-      color : 'white',
+      backgroundColor : 'white',
       font : 'inherit',
-      border : '1px solid white',
-      borderRadius : '5px',
+      border : '1px solid blue',
       padding : '8px',
-      cursor : 'pointer',
-      marginTop : '10px',
-      ':hover' : {
-        backgroundColor : 'lightgreen',
-        color : 'black'
-      }
+      cursor : 'pointer'
     };
     let persons = null;
     if(this.state.showPersons){
@@ -71,30 +67,17 @@ class App extends Component {
               })}
        </div>
       )
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor : 'salmon',
-        color : 'black'
-      }
        }
-       const classes = [];
-
-       if(this.state.person.length <=2)
-       classes.push('go')
-
-       if(this.state.person.length <=1)
-       classes.push('down')
-
-       
     
     return (
-      <StyleRoot>
-        <div className="App">
+      <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to React</h1>
       </header>
-      <p className={classes.join(' ')}>Here we go down.........</p>
+      <p className="App-intro">
+        To get started, edit <code>src/App.js</code> and save to reload.
+      </p>
       <button 
        style = {style}
        onClick={this.togglePersonHandler}>
@@ -102,15 +85,127 @@ class App extends Component {
        </button>
        {persons}
        </div> 
-      </StyleRoot>
-      
     );
   }
 }
 
+export default App;
 
 
-export default Radium(App);
+
+
+
+
+
+
+
+
+// class App extends Component {
+//   state = {
+//     person : [
+//       {id : 'ass1',capacity :"80", days : "1"},
+//       {id : 'afgs41',capacity : "40", days:"5"},
+//       {id : 'arrr12',capacity:"70", days :"10"}
+//     ],
+//     otherState : 'some other things',
+//     showPersons :  false
+//   }
+      
+//   changeInputHandler = (event,id) => {
+//     const index = this.state.person.findIndex((per) => {
+//       return per.id === id; 
+//     });
+//     const cap = {...this.state.person[index]};
+//     //const person = Object.assign({},this.state.person[index]);
+//     cap.capacity = event.target.value;
+
+//     const persons = [...this.state.person];
+//     persons[index] = cap;
+    
+//     this.setState({person : persons});
+//   }
+//   togglePersonHandler = () => {
+//     const doesShow = this.state.showPersons;
+//     this.setState({showPersons : !doesShow});
+//   }
+
+//   deletePersonhandler = (index) => {
+//     const person = [...this.state.person];
+//     person.splice(index,1);
+//     this.setState({person : person})
+//   }
+//   render() {
+//     const style = {
+//       backgroundColor : 'green',
+//       color : 'white',
+//       font : 'inherit',
+//       border : '1px solid white',
+//       borderRadius : '5px',
+//       padding : '8px',
+//       cursor : 'pointer',
+//       marginTop : '10px',
+//       ':hover' : {
+//         backgroundColor : 'lightgreen',
+//         color : 'black'
+//       }
+//     };
+//     let persons = null;
+//     if(this.state.showPersons){
+//       persons = (
+//             <div>
+//               {this.state.person.map((per,index) => {
+//                 return <ErrorBoundary key={per.id}>
+//                       <Person
+//                         click={() => this.deletePersonhandler(index)}
+//                         change= {(event) => this.changeInputHandler(event,per.id)}
+//                         capacity={per.capacity} 
+//                         days={per.days}
+//                         />
+//                         </ErrorBoundary>
+//               })}
+//        </div>
+//       )
+//       style.backgroundColor = 'red';
+//       style[':hover'] = {
+//         backgroundColor : 'salmon',
+//         color : 'black'
+//       }
+//        }
+//        const classes = [];
+
+//        if(this.state.person.length <=2)
+//        classes.push('go')
+
+//        if(this.state.person.length <=1)
+//        classes.push('down')
+
+       
+    
+//     return (
+//       <StyleRoot>
+//         <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <h1 className="App-title">Welcome to React</h1>
+//       </header>
+//       <p className={classes.join(' ')}>Here we go down.........</p>
+//       <button 
+//        style = {style}
+//        onClick={this.togglePersonHandler}>
+//        Change state
+//        </button>
+//        {persons}
+//        </div> 
+//       </StyleRoot>
+      
+//     );
+//   }
+// }
+
+
+
+// export default Radium(App);
+
 // class App extends Component {
 //   state = {
 //     person : [
